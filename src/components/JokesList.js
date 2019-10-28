@@ -3,17 +3,20 @@ import axios from 'axios';
 import Joke from './Joke';
 
 const JokesList = () => {
-  const [jokesList, setJokesList] = useState([]);
+  const [joke, setJokesList] = useState({});
 
   const options = {  headers: {
     'Accept': 'application/json' }
-  }
+  };
 
   function getJoke() {
     axios.get("https://icanhazdadjoke.com", options)
-    .then(response => {console.log(response.data); setJokesList([response.data])});
+    .then(response => {
+      setJokesList(response.data)
+    }, (error) => {
+      console.log(error);
+    });
   };
-
 
   useEffect(() => {
     getJoke();
@@ -24,9 +27,7 @@ const JokesList = () => {
     <div>
       <h2 className="is-size-2">Joke of the day</h2>
       <ul className="box">
-        {jokesList.map(el => (
-          <Joke key={el.id} joke={el.joke} />
-        ))}
+        <Joke key={joke.id} joke={joke.joke} />
       </ul>
       <button onClick={() => getJoke()} className="button is-primary is-large" style={{ marginTop: '1rem'}}>Get Joke</button>
     </div>
