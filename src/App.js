@@ -7,7 +7,7 @@ function App() {
   return (
     <div className="App">
         <Navigation />
-      <div className="wrapper" style={{ textAlign: 'center' }} >
+          <div className="wrapper" style={{ textAlign: 'center' }} >
         <JokesList />
       </div>
     </div>
